@@ -1,4 +1,4 @@
-package myCache
+package myCach
 
 type ByteView struct {
 	b []byte

@@ -1,4 +1,4 @@
-package myCache
+package myCach
 
 import (
 	"fmt"
@@ -38,6 +38,7 @@ func (p *HTTPPool) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	groupName := parts[0]
 	key := parts[1]
 	group := GetGroup(groupName)
+
 	if group == nil {
 		http.Error(w, "no such group:"+groupName, http.StatusNotFound)
 		return

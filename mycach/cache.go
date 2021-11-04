@@ -1,7 +1,7 @@
-package myCache
+package myCach
 
 import (
-	"myCache/lru"
+	"myCache/mycach/lru"
 	"sync"
 )
 
