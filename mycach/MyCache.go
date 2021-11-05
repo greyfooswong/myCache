@@ -3,6 +3,7 @@ package myCach
 import (
 	"fmt"
 	"log"
+	pb "myCache/mycach/myCachepb"
 	"myCache/mycach/singleflight"
 	"sync"
 )
@@ -51,11 +52,16 @@ func (g *Group) load(key string) (value ByteView, err error) {
 }
 
 func (g *Group) getFromPeer(peer PeerGetter, key string) (ByteView, error) {
-	bytes, err := peer.Get(g.name, key)
+	req := &pb.Request{
+		Group: g.name,
+		Key:   key,
+	}
+	res := &pb.Response{}
+	err := peer.Get(req, res)
 	if err != nil {
 		return ByteView{}, err
 	}
-	return ByteView{b: bytes}, nil
+	return ByteView{b: res.Value}, nil
 }
 
 var (
